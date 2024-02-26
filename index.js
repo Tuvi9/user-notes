@@ -1,4 +1,5 @@
 const express = require('express');
+const sequelize = require('./utils/db');
 const app = express();
 
 app.use(express.json());
