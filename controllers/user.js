@@ -3,6 +3,12 @@ const User = require('../models/user');
 
 const register = (req, res) => {
     console.log(req.body);
+    //! Check if the password is at least 8 characters long
+    if (req.body.password.length < 8) {
+        res.json({
+            message: "Password must be at least 8 characters long"
+        })
+    } else {
     //! Crypting the password
     bcrypt.hash(req.body.password, 10, (error, cryptPassword) => {
         //! If username or email already exists give an error
@@ -38,7 +44,7 @@ const register = (req, res) => {
                 })
             }
     })
-})}
+})}}
 
 module.exports = {
     register
