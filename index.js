@@ -1,6 +1,10 @@
+//! Webpack
+const hbs = require('express-handlebars');
 const express = require('express');
-const sequelize = require('./utils/db');
+//! Server
 const session = require('express-session')
+const sequelize = require('./utils/db');
+const path = require('path');
 const app = express();
 
 const User = require('./models/user');
@@ -15,9 +19,28 @@ app.use(session({
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
+//! Handlebars
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
+
+//! Post to server
 const userRoutes = require('./routes/user');
 app.use('/users', userRoutes);
+
+//! Different views
+app.get('/', (req, res) => {
+    res.render('index');
+})
+
+app.get('/register', (req, res) => {
+    res.render('register');
+})
+
+app.get('/login', (req, res) => {
+    res.render('login');
+})
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000...')
