@@ -25,22 +25,9 @@ app.use(express.static('public'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-//! Post to server
+//! Routes
 const userRoutes = require('./routes/user');
 app.use('/users', userRoutes);
-
-//! Different views
-app.get('/', (req, res) => {
-    res.render('index');
-})
-
-app.get('/register', (req, res) => {
-    res.render('register');
-})
-
-app.get('/login', (req, res) => {
-    res.render('login');
-})
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000...')
