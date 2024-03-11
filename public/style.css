@@ -12,11 +12,13 @@ body {
 .nav-bar li {
     display: inline;
     padding: 10vh;
+	color: gold;
+	background-color: transparent;
 }
 
 .nav-bar li :hover {
+	padding: 10px;
     background-color: gold;
-    padding: 10px;
 }
 
 .nav-bar a {
@@ -69,4 +71,12 @@ body {
 	  border-top-left-radius: 0;
 	  border-top-right-radius: 0;
 	}
+}
+
+/*//! Success Message */
+
+.card {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

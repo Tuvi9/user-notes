@@ -1,9 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const { register, login } = require('../controllers/userRegister'); 
+const { register } = require('../controllers/userRegister'); 
+const { login } = require('../controllers/userLogin');
 
 //! Different routes
+//* Register and login page
 router.post('/register', register);
+router.post('/login', login)
 
 //! Different views
 router.get('/', (req, res) => {

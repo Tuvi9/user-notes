@@ -11,17 +11,19 @@ const register = (req, res) => {
     } else {
     //! Crypting the password
     bcrypt.hash(req.body.password, 10, (error, cryptPassword) => {
-        //! If username or email already exists give an error
+        //! Check if the username already exists
         User.findOne({
             where: {
                 username: req.body.username
             }
         })
+        //? If the username already exists, send a response
         .then((user) => {
             if(user) {
                 res.json({
                     message: "Username already exists"
                 })
+            //? If the username does not exist, create the user
             } else {
                 User.create({
                     username: req.body.username,
@@ -35,12 +37,8 @@ const register = (req, res) => {
                         user_id: registered.id,
                     };
                     console.log(req.session)
-                    //! Send a response to the client
-                    res.json({
-                        message: "New user registered successfully",
-                        user: registered,
-                        user_session: req.session.user
-                    })
+                    //! Send the client to a sucess page
+                    res.render('success');
                 })
             }
         })
