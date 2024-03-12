@@ -20,9 +20,7 @@ const register = (req, res) => {
         //? If the username already exists, send a response
         .then((user) => {
             if(user) {
-                res.json({
-                    message: "Username already exists"
-                })
+                res.render('regFailure')
             //? If the username does not exist, create the user
             } else {
                 User.create({
@@ -30,7 +28,7 @@ const register = (req, res) => {
                     email: req.body.email,
                     password: cryptPassword
                 })
-                //! If the user is created successfully open a session
+                //? If the user is created successfully open a session
                 .then((registered) => {
                     req.session.user = {
                         username: registered.username,
@@ -38,7 +36,7 @@ const register = (req, res) => {
                     };
                     console.log(req.session)
                     //! Send the client to a sucess page
-                    res.render('success');
+                    res.render('regSuccess');
                 })
             }
         })
