@@ -1,5 +1,21 @@
 const bcrypt = require('bcrypt');
 const Notes = require('../models/notes');
+const User = require('../models/user');
+
+const getAllnotes = (req, res) => {
+    //! Fetch all notes
+    Notes.findAll({
+        //! Include the user model
+        include: [{
+            model: User,
+            as: 'user',
+            attributes: ['username', 'email']
+        }]
+    })
+    .then((notes) => {
+        res.json(notes);
+    })
+}
 
 const createNote = (req, res) => {
     console.log(req.body);
@@ -19,5 +35,6 @@ const createNote = (req, res) => {
 }
 
 module.exports = {
-    createNote
+    createNote,
+    getAllnotes
 }

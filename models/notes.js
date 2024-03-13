@@ -3,7 +3,7 @@ const sequelize = require('../utils/db');
 
 
 const Notes = sequelize.define('Notes', {
-    noteId: {
+    id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
@@ -16,8 +16,7 @@ const Notes = sequelize.define('Notes', {
     description: {
         type: Sequelize.STRING,
         allowNull: false
-    },
-
+    }
 },
 {
     tableName: 'notes'
